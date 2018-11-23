@@ -3,7 +3,7 @@ import typing
 
 import click
 
-from minimize.core import Minimize
+from minimizer.core import Minimizer
 
 
 @click.command()
@@ -43,6 +43,6 @@ from minimize.core import Minimize
     help="Flag that will replace orginal files with new images",
 )
 def run(*args: typing.Any, **kwargs: typing.Any) -> None:
-    mini = Minimize(*args, **kwargs)
+    mini = Minimizer(*args, **kwargs)
     mini()
     click.echo(f"Minimization complete! \U0001F4AB")

@@ -23,7 +23,7 @@ IMAGE_FORMATS = (
 )
 
 
-class Minimize:
+class Minimizer:
     """
     Minimize image(s) within a directory
     """
