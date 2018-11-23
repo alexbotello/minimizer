@@ -48,7 +48,6 @@ class Minimize:
         if name is not None:
             assert os.path.isfile(f"{directory + name}"), f"File {name} does not exist."
             name = name.split(".")[0]
-
         self.dir = directory
         self.size = size
         self.replace = replace
@@ -71,10 +70,8 @@ class Minimize:
     def _images_of_dir(self):
         for file in os.listdir(self.dir):
             self.filename = file.split(".")[0]
-            print(self.filename)
             if self.name is not None and self.name != self.filename:
                 continue
             yield file
-            print(file)
             if self.name is not None and self.name == self.filename:
                 break
