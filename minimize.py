@@ -44,7 +44,7 @@ class MinimizeImages:
         ), f"Image file format {_format} is not supported"
 
         self.dir = directory
-        self.dimensions = dimensions if dimensions else (250, 250)
+        self.dimensions = dimensions
         self.format = _format
 
     def __call__(self) -> None:
