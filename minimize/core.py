@@ -67,7 +67,7 @@ class Minimize:
             except IOError as exc:
                 click.echo(f"Cannot resize image {image}, {exc}")
 
-    def _images_of_dir(self):
+    def _images_of_dir(self) -> typing.Generator[str, None, None]:
         for file in os.listdir(self.dir):
             self.filename = file.split(".")[0]
             if self.name is not None and self.name != self.filename:
