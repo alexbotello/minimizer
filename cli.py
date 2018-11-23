@@ -12,7 +12,7 @@ from minimize import Minimize
     "--dir",
     "directory",
     default=os.getcwd(),
-    help="Specify directory to resize, will default to current directory",
+    help="Specify path for directory. Defaults to current working directory",
 )
 @click.option(
     "-s",
@@ -20,27 +20,27 @@ from minimize import Minimize
     "size",
     type=(int, int),
     default=(250, 250),
-    help="What size do you want your images? Example: 250 250",
+    help="Specify new size dimensions. Defaults to 250 250",
 )
 @click.option(
     "-f",
     "--format",
     "format",
     default="PNG",
-    help="What format would you like your images in? Defaults to PNG",
+    help="Specifiy image format. Default image format is PNG",
 )
 @click.option(
     "-n",
     "--name",
     "name",
-    help="Name of specific image file to minimize. Must include file extension",
+    help="Name specific image file to minimize. Must include file extension",
 )
 @click.option(
     "-r",
     "--replace",
     "replace",
     is_flag=True,
-    help="Replace orginal files with new images",
+    help="Flag that will replace orginal files with new images",
 )
 def run(*args, **kwargs) -> None:
     mini = Minimize(*args, **kwargs)
