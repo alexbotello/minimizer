@@ -13,8 +13,7 @@ Usage
       -f, --format     Specify image format. Default image format is PNG.
       -n, --name       Name specific image file to minimize. Must include file extension.
       -r, --replace    Flag that will replace original files with new images
-
-      --help       Show this message and exit.
+      --help           Show this message and exit.
 
 
     Usage Examples:
