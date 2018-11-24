@@ -1,5 +1,5 @@
 #!/bin/sh -e
 
-pytest --ignore venv -W ignore::DeprecationWarning --cov=minimizer/ --cov=tests --cov-fail-under=100 --cov-report=term-missing ${@}
+python -m pytest --ignore venv -W ignore::DeprecationWarning --cov=minimizer --cov-report=term-missing ${@}
 mypy minimizer --ignore-missing-imports --disallow-untyped-defs
 black minimizer tests --check
