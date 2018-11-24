@@ -5,6 +5,9 @@ cache: pip
 python:
   - "3.6"
 
+before_install:
+  - chmod +x scripts/test
+
 install:
   - pip install -r requirements.txt
 
