@@ -1,3 +1,6 @@
+<a href="https://travis-ci.org/alexbotello/minimizer">
+    <img src="https://travis-ci.org/alexbotello/minimizer.svg?branch=master" alt="Build Status">
+</a>
 <a href="https://codecov.io/gh/alexbotello/minimizer">
     <img src="https://codecov.io/gh/alexbotello/minimizer/branch/master/graph/badge.svg" alt="Coverage">
 </a>
