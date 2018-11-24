@@ -1,6 +1,9 @@
 <a href="https://codecov.io/gh/alexbotello/minimizer">
     <img src="https://codecov.io/gh/alexbotello/minimizer/branch/master/graph/badge.svg" alt="Coverage">
 </a>
+<a href="https://pypi.org/project/minimizer/">
+    <img src="https://badge.fury.io/py/minimizer.svg" alt="PyPI version">
+</a>
 
 # minimizer
 A command line tool that shrinks images in a directory to a specified size
