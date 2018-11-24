@@ -34,7 +34,6 @@ class Minimizer:
         name: str = None,
         size: typing.Tuple[int, int] = None,
         format: str = "PNG",
-        replace: bool = False,
     ) -> None:
         _format = format.upper()
         assert os.path.isdir(
@@ -50,18 +49,15 @@ class Minimizer:
             name = name.split(".")[0]
         self.dir = directory
         self.size = size
-        self.replace = replace
         self.format = _format
         self.name = name
 
     def __call__(self) -> None:
         for image in self._images_of_dir():
-            outfile = f"{self.dir}/{self.filename}-min.png"
-            path = f"{self.dir}/{image}"
-            if self.replace:
-                outfile = path
+            fp = f"{self.dir}/{image}"
+            outfile = f"{fp.split('.')[0]}.{self.format.lower()}"
             try:
-                im = Image.open(path)
+                im = Image.open(fp)
                 im.thumbnail(self.size, Image.ANTIALIAS)
                 im.save(outfile, self.format)
             except IOError as exc:
@@ -69,9 +65,11 @@ class Minimizer:
 
     def _images_of_dir(self) -> typing.Generator[str, None, None]:
         for file in os.listdir(self.dir):
-            self.filename = file.split(".")[0]
-            if self.name is not None and self.name != self.filename:
+            filename = file.split(".")[0]
+            if not os.path.isfile(file):
+                continue
+            if self.name is not None and self.name != filename:
                 continue
             yield file
-            if self.name is not None and self.name == self.filename:
+            if self.name is not None and self.name == filename:
                 break

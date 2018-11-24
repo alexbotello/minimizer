@@ -35,13 +35,6 @@ from minimizer.core import Minimizer
     "name",
     help="Name specific image file to minimize. Must include file extension",
 )
-@click.option(
-    "-r",
-    "--replace",
-    "replace",
-    is_flag=True,
-    help="Flag that will replace orginal files with new images",
-)
 def run(*args: typing.Any, **kwargs: typing.Any) -> None:
     mini = Minimizer(*args, **kwargs)
     mini()
