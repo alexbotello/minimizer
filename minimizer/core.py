@@ -53,7 +53,11 @@ class Minimizer:
 
     def __call__(self) -> None:
         for image in self._images_of_dir():
-            outfile, extension = self.fp.split(".")
+            try:
+                outfile, extension = self.fp.split(".")
+            except ValueError:
+                pass
+
             if self.format is not None:
                 extension = self.format.lower()
             outfile = f"{outfile}-min.{extension}"
@@ -68,7 +72,7 @@ class Minimizer:
         for file in os.listdir(self.dir):
             self.fp = f"{self.dir}/{file}"
             if not os.path.isfile(self.fp) or "." not in file:
-                continue
+                continue  # pragma: no cover
             if self.name is not None and self.name != file:
                 continue  # pragma: no cover
             yield file
