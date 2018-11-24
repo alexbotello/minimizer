@@ -26,7 +26,7 @@ from minimizer.core import Minimizer
     "-f",
     "--format",
     "format",
-    default="PNG",
+    default=None,
     help="Specifiy image format. Default image format is PNG",
 )
 @click.option(

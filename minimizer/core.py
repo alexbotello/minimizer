@@ -33,20 +33,20 @@ class Minimizer:
         directory: str,
         name: str = None,
         size: typing.Tuple[int, int] = None,
-        format: str = "PNG",
+        format: str = None,
     ) -> None:
         _format = format.upper()
         assert os.path.isdir(
             directory
         ), f"{directory} does not exist. Recheck your directory path."
 
-        assert (
-            _format in IMAGE_FORMATS
-        ), f"Image file format {_format} is not supported."
+        if _format is not None:
+            assert (
+                _format in IMAGE_FORMATS
+            ), f"Image file format {format} is not supported."
 
         if name is not None:
-            assert os.path.isfile(f"{directory + name}"), f"File {name} does not exist."
-            name = name.split(".")[0]
+            assert os.path.isfile(f"{directory}/{name}"), f"File {name} does not exist."
         self.dir = directory
         self.size = size
         self.format = _format
@@ -54,10 +54,13 @@ class Minimizer:
 
     def __call__(self) -> None:
         for image in self._images_of_dir():
-            fp = f"{self.dir}/{image}"
-            outfile = f"{fp.split('.')[0]}.{self.format.lower()}"
+            outfile, extension = self.fp.split(".")
+            if self.format is not None:
+                extension = self.format.lower()
+            outfile = f"{outfile}.{extension}"
+
             try:
-                im = Image.open(fp)
+                im = Image.open(self.fp)
                 im.thumbnail(self.size, Image.ANTIALIAS)
                 im.save(outfile, self.format)
             except IOError as exc:
@@ -65,11 +68,11 @@ class Minimizer:
 
     def _images_of_dir(self) -> typing.Generator[str, None, None]:
         for file in os.listdir(self.dir):
-            filename = file.split(".")[0]
-            if not os.path.isfile(file):
+            self.fp = f"{self.dir}/{file}"
+            if not os.path.isfile(self.fp):
                 continue
-            if self.name is not None and self.name != filename:
+            if self.name is not None and self.name != file:
                 continue
             yield file
-            if self.name is not None and self.name == filename:
+            if self.name is not None and self.name == file:
                 break
