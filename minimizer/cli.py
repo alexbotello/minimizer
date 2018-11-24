@@ -36,6 +36,8 @@ from minimizer.core import Minimizer
     help="Name specific image file to minimize. Must include file extension",
 )
 def run(*args: typing.Any, **kwargs: typing.Any) -> None:
-    mini = Minimizer(*args, **kwargs)
-    mini()
-    click.echo(f"Minimization complete! \U0001F4AB")
+    try:
+        mini = Minimizer(*args, **kwargs)
+        mini()
+    finally:
+        click.echo(f"Minimization complete! \U0001F4AB")

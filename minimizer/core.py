@@ -35,21 +35,20 @@ class Minimizer:
         size: typing.Tuple[int, int] = None,
         format: str = None,
     ) -> None:
-        _format = format.upper()
         assert os.path.isdir(
             directory
         ), f"{directory} does not exist. Recheck your directory path."
 
-        if _format is not None:
+        if format is not None:
             assert (
-                _format in IMAGE_FORMATS
+                format.upper() in IMAGE_FORMATS
             ), f"Image file format {format} is not supported."
 
         if name is not None:
             assert os.path.isfile(f"{directory}/{name}"), f"File {name} does not exist."
         self.dir = directory
         self.size = size
-        self.format = _format
+        self.format = format
         self.name = name
 
     def __call__(self) -> None:
@@ -57,8 +56,7 @@ class Minimizer:
             outfile, extension = self.fp.split(".")
             if self.format is not None:
                 extension = self.format.lower()
-            outfile = f"{outfile}.{extension}"
-
+            outfile = f"{outfile}-min.{extension}"
             try:
                 im = Image.open(self.fp)
                 im.thumbnail(self.size, Image.ANTIALIAS)
