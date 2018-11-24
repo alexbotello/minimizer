@@ -67,10 +67,10 @@ class Minimizer:
     def _images_of_dir(self) -> typing.Generator[str, None, None]:
         for file in os.listdir(self.dir):
             self.fp = f"{self.dir}/{file}"
-            if not os.path.isfile(self.fp):
+            if not os.path.isfile(self.fp) or "." not in file:
                 continue
             if self.name is not None and self.name != file:
-                continue
+                continue  # pragma: no cover
             yield file
             if self.name is not None and self.name == file:
-                break
+                break  # pragma: no cover
