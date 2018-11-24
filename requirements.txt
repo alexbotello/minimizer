@@ -1,0 +1,9 @@
+Pillow
+Click
+
+# Testing
+black
+codecov
+mypy
+pytest
+pytest-cov
