@@ -1,7 +1,11 @@
+<a href="https://codecov.io/gh/alexbotello/minimizer">
+    <img src="https://codecov.io/gh/alexbotello/minimizer/branch/master/graph/badge.svg" alt="Coverage">
+</a>
+
 # minimizer
 A command line tool that shrinks images in a directory to a specified size
 
-## Installation
+Installation
 -------
 Install using pip:
 ```
@@ -12,7 +16,7 @@ Or with pipenv:
 pipenv install minimizer
 ```
 
-## Usage
+Usage
 -------
 
     $ minimizer
