@@ -5,7 +5,7 @@
     <img src="https://codecov.io/gh/alexbotello/minimizer/branch/master/graph/badge.svg" alt="Coverage">
 </a>
 <a href="https://pypi.org/project/minimizer/">
-    <img src="https://badge.fury.io/py/minimizer.svg" alt="PyPI version">
+    <img src="https://badge.fury.io/py/minimizer.svg" alt="Package version">
 </a>
 
 # minimizer
