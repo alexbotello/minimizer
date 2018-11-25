@@ -53,14 +53,10 @@ class Minimizer:
 
     def __call__(self) -> None:
         for image in self._images_of_dir():
-            try:
-                outfile, extension = self.fp.split(".")
-            except ValueError:
-                pass
-
+            path, extension = os.path.splitext(self.fp)
             if self.format is not None:
-                extension = self.format.lower()
-            outfile = f"{outfile}-min.{extension}"
+                extension = f".{self.format.lower()}"
+            outfile = f"{path}-min{extension}"
             try:
                 im = Image.open(self.fp)
                 im.thumbnail(self.size, Image.ANTIALIAS)
