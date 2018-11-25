@@ -53,12 +53,13 @@ class Minimizer:
 
     def __call__(self) -> None:
         for image in self._images_of_dir():
-            path, extension = os.path.splitext(self.fp)
+            fp = f"{self.dir}/{image}"
+            path, extension = os.path.splitext(fp)
             if self.format is not None:
                 extension = f".{self.format.lower()}"
             outfile = f"{path}-min{extension}"
             try:
-                im = Image.open(self.fp)
+                im = Image.open(fp)
                 im.thumbnail(self.size, Image.ANTIALIAS)
                 im.save(outfile, self.format)
             except IOError as exc:
@@ -66,8 +67,7 @@ class Minimizer:
 
     def _images_of_dir(self) -> typing.Generator[str, None, None]:
         for file in os.listdir(self.dir):
-            self.fp = f"{self.dir}/{file}"
-            if not os.path.isfile(self.fp) or "." not in file:
+            if not os.path.isfile(f"{self.dir}/{file}") or "." not in file:
                 continue  # pragma: no cover
             if self.name is not None and self.name != file:
                 continue  # pragma: no cover
