@@ -51,3 +51,19 @@ Usage
 
        Minimize a specfic image in another directory:
        $ minimizer -d /home/user/code/images -n img12.jpg -s 200 100
+
+Contribute
+-------
+1. Fork this repository and create a new branch:
+    -   `git checkout -b <branch name>`
+
+2. Install all dependencies with pipenv:
+    - `pipenv install --dev`
+
+3. Before you commit, run all tests and checks:
+    - `sh scripts/test`
+
+4. Commit and push your new branch to your forked repo:
+    - `git push origin <branch name>`
+
+5. Create your pull request
