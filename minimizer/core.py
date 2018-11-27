@@ -2,6 +2,7 @@ import os
 import typing
 
 import click
+import crayons
 from PIL import Image
 
 
@@ -45,32 +46,36 @@ class Minimizer:
             ), f"Image file format {format} is not supported."
 
         if name is not None:
-            assert os.path.isfile(f"{directory}/{name}"), f"File {name} does not exist."
+            assert os.path.isfile(
+                f"{directory}/{name}"
+            ), f"File {crayons.red(name, bold=True)} does not exist."
         self.dir = directory
         self.size = size
         self.format = format
         self.name = name
 
     def __call__(self) -> None:
-        for image in self._images_of_dir():
-            fp = f"{self.dir}/{image}"
-            path, extension = os.path.splitext(fp)
+        for path, name, extension in self._images_of_dir():
             if self.format is not None:
                 extension = f".{self.format.lower()}"
-            outfile = f"{path}-min{extension}"
+            outfile = f"{name}-min{extension}"
             try:
-                im = Image.open(fp)
+                im = Image.open(path)
                 im.thumbnail(self.size, Image.ANTIALIAS)
                 im.save(outfile, self.format)
-            except IOError as exc:
-                click.echo(f"Cannot resize image {image}, {exc}")
+            except IOError:
+                filename = crayons.red(path.split("/")[-1], bold=True)
+                click.echo(f"Cannot resize {filename}")
 
-    def _images_of_dir(self) -> typing.Generator[str, None, None]:
-        for file in os.listdir(self.dir):
-            if not os.path.isfile(f"{self.dir}/{file}") or "." not in file:
+    def _images_of_dir(
+        self
+    ) -> typing.Generator[typing.Tuple[str, str, str], None, None]:
+        for entry in os.scandir(self.dir):
+            if not entry.is_file():
                 continue  # pragma: no cover
-            if self.name is not None and self.name != file:
+            if self.name is not None and self.name != entry.name:
                 continue  # pragma: no cover
-            yield file
-            if self.name is not None and self.name == file:
+            name, extension = os.path.splitext(entry.path)
+            yield entry.path, name, extension
+            if self.name is not None and self.name == entry.name:
                 break  # pragma: no cover
