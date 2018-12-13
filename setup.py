@@ -7,7 +7,7 @@ def get_long_description():
 
 setuptools.setup(
     name="minimizer",
-    version="0.4.4",
+    version="0.4.5",
     url="https://github.com/alexbotello/minimizer",
     license="MIT",
     description="A command line tool to shrink image(s) in a directory to a specified size",
