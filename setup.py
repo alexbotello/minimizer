@@ -16,7 +16,7 @@ setuptools.setup(
     author_email="alexander.botello@g.austincc.edu",
     packages=setuptools.find_packages(),
     py_modules=["minimizer"],
-    install_requires=["Click", "Pillow"],
+    install_requires=["click", "pillow", "crayons"],
     entry_points="""
         [console_scripts]
         minimizer=minimizer.cli:run
